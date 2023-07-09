@@ -1,0 +1,6 @@
+{
+	"name": "@essem/libopenmpt",
+  "description": "Unofficial WASM build of libopenmpt for usage with NPM projects",
+	"version": "0.7.2",
+  "main": "./libopenmpt.js"
+}
