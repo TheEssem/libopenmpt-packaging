@@ -45,7 +45,7 @@ jobs:
           ref: libopenmpt-0.7.2
           path: openmpt
       - name: Build libopenmpt
-        run: cd openmpt && env LDFLAGS="-s EXPORTED_FUNCTIONS=\"['_malloc','_free']\"" make CONFIG=emscripten
+        run: cd openmpt && env LDFLAGS="-s EXPORTED_FUNCTIONS=\"['_malloc','_free']\" -s EXPORT_ES6=1 -s MODULARIZE=1" make CONFIG=emscripten TEST=0
       - name: Prepare files
         run: |
           mkdir build
@@ -55,6 +55,6 @@ jobs:
       - name: Publish
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: build
           publish_dir: ./build
