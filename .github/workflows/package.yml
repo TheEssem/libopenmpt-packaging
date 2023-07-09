@@ -45,7 +45,7 @@ jobs:
           ref: libopenmpt-0.7.2
           path: openmpt
       - name: Build libopenmpt
-        run: cd openmpt && env LDFLAGS="-s EXPORTED_FUNCTIONS=\"['_malloc','_free']\" -s EXPORT_ES6=1 -s MODULARIZE=1 -s ENVIRONMENT=web" make CONFIG=emscripten TEST=0
+        run: cd openmpt && env LDFLAGS="-s EXPORTED_RUNTIME_METHODS=UTF8ToString,stringToUTF8 -s EXPORTED_FUNCTIONS=\"['_malloc','_free']\" -s EXPORT_ES6=1 -s MODULARIZE=1 -s ENVIRONMENT=web" make CONFIG=emscripten TEST=0
       - name: Prepare files
         run: |
           mkdir build
