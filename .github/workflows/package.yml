@@ -22,8 +22,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - uses: mymindstorm/setup-emsdk@v11
         
       - name: Checkout libopenmpt
         uses: actions/checkout@v3
@@ -31,7 +31,6 @@ jobs:
           repository: OpenMPT/openmpt
           ref: libopenmpt-0.7.2
           path: openmpt
-          
       - name: Build libopenmpt
         run: cd openmpt && env LDFLAGS="-s EXPORTED_FUNCTIONS=\"['_malloc','_free']\"" make CONFIG=emscripten
       - name: Prepare files
