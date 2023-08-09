@@ -45,7 +45,7 @@ jobs:
           ref: libopenmpt-0.7.2
           path: openmpt
       - name: Build libopenmpt
-        run: cd openmpt && env LDFLAGS="-s EXPORTED_RUNTIME_METHODS=UTF8ToString,stringToUTF8 -s EXPORTED_FUNCTIONS=\"['_malloc','_free']\" -s EXPORT_ES6=1 -s MODULARIZE=1 -s ENVIRONMENT=web" make CONFIG=emscripten TEST=0
+        run: cd openmpt && env CPPFLAGS="-DMPT_BUILD_AUDIOWORKLETPROCESSOR" LDFLAGS="-s EXPORTED_RUNTIME_METHODS=UTF8ToString,stringToUTF8 -s EXPORTED_FUNCTIONS=\"['_malloc','_free']\" -s EXPORT_ES6=1 -s MODULARIZE=1 -s WASM=1 -s WASM_ASYNC_COMPILATION=0 -s SINGLE_FILE=1 -s ENVIRONMENT=web" make CONFIG=emscripten TEST=0
       - name: Prepare files
         run: |
           mkdir build
@@ -56,5 +56,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: build
+          publish_branch: audioworklet-build
           publish_dir: ./build
